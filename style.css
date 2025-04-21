@@ -5,12 +5,16 @@ body {
     font-family: Roboto, sans-serif;
     display: flex;
     flex-direction: column;
+    align-items: center;
+
   }
 
 .header {
     height: 10vh;
     min-height: 76px;
-    padding: 0px 25px;
+    min-width: 90vw;
+    padding: 10px 24px 0px;
+    margin: 0px 54px;
     border-width: 1px;
     border-style: dashed;
     border-color: black;
@@ -27,11 +31,13 @@ body {
 
 .search {
     border: 1px, solid;
-    border-radius: 18px;
+    border-radius: 22px;
+    height: 4vh;
     width: 50vw;
     padding: 8px;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .icon {
@@ -46,11 +52,13 @@ body {
 
 .location {
     border: 1px, solid;
-    border-radius: 18px;
+    border-radius: 22px;
+    height: 4vh;
     width: 15vw;
     padding: 8px;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 
@@ -67,17 +75,29 @@ body {
     border: 1px, dotted, red;
 
     width: 90vw;
-    padding: 24px 48px 12px 24px;
-    gap: 24px;
+    padding: 24px 0px 12px;
+    margin: 0px 54px;
+    gap: 48px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.box {
-    flex: 1;
+.boxA, .boxB, .boxC, .boxD  {
     height: 36vh;
     width: 350px;
     border: 3px, solid;
     border-radius: 20px;
+}
+.boxA {
+    flex: 3;
+}
+.boxB {
+    flex: 5;
+}
+.boxC {
+    flex:4;
+}
+.boxD {
+    flex: 9;
 }
