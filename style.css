@@ -14,7 +14,7 @@ body {
     min-height: 76px;
     min-width: 90vw;
     padding: 10px 24px 0px;
-    margin: 0px 54px;
+    margin: 10px 54px 0px;
     border-width: 1px;
     border-style: dashed;
     border-color: black;
@@ -41,23 +41,32 @@ body {
 }
 
 .icon {
-    margin-left: 10px;
+    border: 1px, dotted, red;
+    margin-left: 0px;
 }
 
-.textHeader {
-    border: 1px, dotted;
+.iconH {
+    border: 1px, dotted, red;
+    margin-left: 18px;
+}
 
+.textHeader, .searchHeader {
+    border: 1px, dotted, red;
     margin-left: 10px;
+}
+.searchHeader {
+    font-size: 14px;
 }
 
 .location {
     border: 1px, solid;
     border-radius: 22px;
     height: 4vh;
-    width: 15vw;
-    padding: 8px;
+    width: 18vw;
+    padding: 8px 10px;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -84,36 +93,39 @@ body {
 }
 
 .boxA, .boxB, .boxC, .boxD  {
-    height: 36vh;
+    height: 34vh;
     width: 350px;
     border: 3px, solid;
     border-radius: 20px;
 }
 
 .boxA {
-    flex: 3;
+    flex: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
 }
 .cityA {
-    margin-top: 40px;
+    margin-top: 46px;
     font-size: 24px;
     font-weight: bold;
 } 
 .timeA {
-    margin-top: 40px;
-    font-size: 54px;
+    border: 1px, dotted, red;
+    margin-top: 30px;
+    font-size: 72px;
     font-weight: bold;
+    line-height: 50px;
 } 
 .dateA {
-    font-size: 18px;
+    border: 1px, dotted, red;
+    padding-top: 4px;
+    font-size: 16px;
 } 
 
 
 .boxB {
-    flex: 5;
+    flex: 3;
     display: flex;
     flex-direction: row;
 }
@@ -126,31 +138,51 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
 }
 .tempB1-1 {
-    margin-top: 22px;
-    font-size: 48px;
+    border: 1px, dotted, red;
+    margin-top: 32px;
+    font-size: 60px;
+    line-height: 50px;
     font-weight: bold;
 }
 .tempB1-2 {
-    font-size: 18px;
+    border: 1px, dotted, red;
+    align-self: flex-start;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
     margin-bottom: 16px;
 }
+.tempB1-21 {
+    font-weight: bold;
+    font-size: 14px;
+}
+.tempB1-22 {
+    padding-left: 8px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
 .suntime {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     min-width: 120px;
     align-items: center;
     border: 1px, dotted, red;
+    margin-bottom: 12px;
 }
 .sun-info {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 12px;
 }
-.info-1 { font-weight: bold;}
+.info-1 { 
+    font-size: 14px;
+    font-weight: bold;
+}
 
 .column-B2 {
     display: flex;
@@ -171,30 +203,31 @@ body {
 }
 .row1-B3, .row2-B3 {
     border: 1px, dotted, red;
+    flex: 1;
     display: flex;
     flex-direction: row;
-    flex: 1;
 }
 .humidityB3-1, .wspeedB3-1, .pressureB3-1, .uvB3-1 {
     border: 1px, dotted, red;
     flex: 1;
+    margin: 14px 0px;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
-    margin: 14px 0px;
 }
 .valueB3 {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
 }
+
 
 .boxC {
     flex:4;
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 .titleC, .titleD {
     border: 1px, dotted, red;
@@ -208,10 +241,26 @@ body {
     flex: 1;
     padding: 0px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
-.tempC { font-weight: bold;}
+.iconC { 
+    margin-left: 12px;
+}
+.tempC { 
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 24px;
+}
+.dateC { 
+    border: 1px, dotted, red;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: 24px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
 .boxD {
     flex: 9;
