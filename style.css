@@ -27,6 +27,7 @@ body {
 }
 
 .mode {
+    font-size: 14px;
     display: flex;
     flex-direction: column;
 }
@@ -178,11 +179,14 @@ body {
     margin-left: 24px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-self: flex-start;
     min-width: 120px;
 }
+.iconB1 {
+    padding-left: 12px;
+}
 .sun-info {
+    margin-left: 6px;
     display: flex;
     flex-direction: column;
     font-size: 12px;
@@ -190,6 +194,10 @@ body {
 .info-1 { 
     font-size: 16px;
     font-weight: bold;
+}
+.info-2 { 
+    padding-left: 2px;
+    font-size: 12px;
 }
 
 .column-B2 {
