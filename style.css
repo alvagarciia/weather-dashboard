@@ -1,4 +1,5 @@
 body {
+    background: linear-gradient(135deg, #ffffff 0%, #d1ced2 60%, #d1ced2 100%);
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -15,9 +16,6 @@ body {
     min-width: 90vw;
     padding: 10px 24px 0px;
     margin: 10px 54px 0px;
-    border-width: 1px;
-    border-style: dashed;
-    border-color: black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -30,6 +28,8 @@ body {
 }
 
 .search {
+    background-color: #d9d9d9;
+    box-shadow: 0px 0px 10px #c6c6c8;
     border: 1px, solid;
     border-radius: 22px;
     height: 4vh;
@@ -56,9 +56,12 @@ body {
 }
 .searchHeader {
     font-size: 14px;
+    color: #292929;
 }
 
 .location {
+    background-color: #4cbb17;
+    box-shadow: 0px 0px 10px #c6c6c8;
     border: 1px, solid;
     border-radius: 22px;
     height: 4vh;
@@ -68,6 +71,7 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    color: #dbf1d1;
 }
 
 
@@ -77,12 +81,9 @@ body {
     flex-direction: column;
     align-items: center;
     flex: 1;
-    border: 1px, dotted, red;
 }
 
 .boxRow{
-    border: 1px, dotted, red;
-
     width: 90vw;
     padding: 18px 0px 12px;
     margin: 0px 54px;
@@ -93,10 +94,14 @@ body {
 }
 
 .boxA, .boxB, .boxC, .boxD  {
+    background-color: #d9d9d9;
+    box-shadow: 8px 8px 4px #707172;
     height: 34vh;
     width: 350px;
-    border: 3px, solid;
     border-radius: 20px;
+}
+.boxC, .boxD  {
+    height: 38vh;
 }
 
 .boxA {
@@ -125,6 +130,7 @@ body {
 
 
 .boxB {
+    color: #292929;
     flex: 3;
     display: flex;
     flex-direction: row;
@@ -141,6 +147,9 @@ body {
 }
 .tempB1-1 {
     border: 1px, dotted, red;
+    background: linear-gradient(to right, #3d3d3d, #a5a5a5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-top: 32px;
     font-size: 60px;
     line-height: 50px;
@@ -275,6 +284,7 @@ body {
     gap: 14px;
 }
 .hourD {
+    background: linear-gradient(to bottom, #f49b36, #e4d2b6);
     flex: 1;
     margin-bottom: 12px;
     background-color: beige;
@@ -285,6 +295,7 @@ body {
     align-items: center;
 }
 .timeD {
+    border: 1px, dotted, red;
     font-weight: bold;
     font-size: 18px;
 }
