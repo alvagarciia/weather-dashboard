@@ -89,6 +89,7 @@ body {
     border: 3px, solid;
     border-radius: 20px;
 }
+
 .boxA {
     flex: 3;
     display: flex;
@@ -110,9 +111,86 @@ body {
     font-size: 18px;
 } 
 
+
 .boxB {
     flex: 5;
+    display: flex;
+    flex-direction: row;
 }
+.column-B1, .column-B2, .column-B3 {
+    border: 1px, dotted, red;
+    flex: 1;
+}
+
+.column-B1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.tempB1-1 {
+    margin-top: 14px;
+    font-size: 48px;
+    font-weight: bold;
+}
+.tempB1-2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+.suntime {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 120px;
+    align-items: center;
+    border: 1px, dotted, red;
+}
+.sun-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info-1 { font-weight: bold;}
+
+.column-B2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-end;
+}
+.weatherB2 {
+    margin-bottom: 42px;
+    margin-top: 36px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.column-B3 {
+    display: flex;
+    flex-direction: column;
+}
+.row1-B3, .row2-B3 {
+    border: 1px, dotted, red;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: ;
+}
+.humidityB3-1, .wspeedB3-1, .pressureB3-1, .uvB3-1 {
+    border: 1px, dotted, red;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0px;
+}
+.valueB3 {
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .boxC {
     flex:4;
 }
