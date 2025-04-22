@@ -2,7 +2,7 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
-    font-family: Roboto, sans-serif;
+    font-family: Poppins, Roboto, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,7 +121,7 @@ body {
     border: 1px, dotted, red;
     flex: 1;
 }
-
+ 
 .column-B1 {
     display: flex;
     flex-direction: column;
@@ -129,7 +129,7 @@ body {
     gap: 12px;
 }
 .tempB1-1 {
-    margin-top: 14px;
+    margin-top: 22px;
     font-size: 48px;
     font-weight: bold;
 }
@@ -174,7 +174,6 @@ body {
     display: flex;
     flex-direction: row;
     flex: 1;
-    align-items: ;
 }
 .humidityB3-1, .wspeedB3-1, .pressureB3-1, .uvB3-1 {
     border: 1px, dotted, red;
@@ -193,7 +192,28 @@ body {
 
 .boxC {
     flex:4;
+    paddin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
+.titleC {
+    border: 1px, dotted, red;
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    align-self: center;
+}
+.dayC {
+    border: 1px, dotted, red;
+    flex: 1;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tempC { font-weight: bold;}
+
 .boxD {
     flex: 9;
 }
