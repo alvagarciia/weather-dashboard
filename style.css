@@ -52,8 +52,20 @@ body {
     align-self: center;
 }
 .searchH {
+    font-size: 16px;
+    color: #292929;
+    align-self: baseline;
+}
+input {
     font-size: 14px;
     color: #292929;
+    min-width: 300px;
+    min-height: 4vh;
+    background-color: #d9d9d9 !important;
+    border: none;
+}
+input:focus {
+    outline: none;
 }
 
 .location {

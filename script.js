@@ -4,6 +4,11 @@ class WeatherInfo {
         this.clockInterval = null;
     }
 
+    update(city) {
+        this.city = city;
+        this.fetchData();
+    }
+
     fetchData() {
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`
         fetch(url)
@@ -74,7 +79,16 @@ class WeatherInfo {
 }
 
 // let place = "London,uk"
-let place = "Beijing,chi"
-// let place = "Arkansas,us"
-const weather = new WeatherInfo(place)
+// let place = "Beijing,chi"
+let place = "Arkansas,us"
+let weather = new WeatherInfo(place)
 weather.fetchData()
+
+let searchCity = "";
+
+document.getElementById("searchInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      searchValue = document.getElementById("searchInput").value.trim();
+      weather.update(searchValue);
+    }
+  });
