@@ -1,6 +1,11 @@
+// For AI
+import OpenAI from "openai";
+const client = new OpenAI();
+
+
 class WeatherInfo {
-    constructor(city) {
-        this.city = city;
+    constructor(cityInput) {
+        this.cityInput = cityInput;
         this.clockInterval = null;
         this.nextDaysIconCode = [];
         this.iconCUrl = [];
@@ -13,14 +18,14 @@ class WeatherInfo {
         this.nextHoursTemp = [];
     }
 
-    update(city) {
-        this.city = city;
+    update(cityInput) {
+        this.cityInput = cityInput;
         this.fetchData();
     }
 
     fetchData() {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
-        const url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
+        const url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -66,8 +71,9 @@ class WeatherInfo {
                     this.iconDUrl[i] = `https://openweathermap.org/img/wn/${this.nextHoursIconCode[i]}@4x.png`;
                     this.nextHoursTemp[i] = data.list[i].main.temp;
                 }
+                this.nextHoursWeather = data.list[0].weather[0].description;
                 this.updateDOM2();
-              })
+            })
             .catch(err => console.error("Forecast fetch failed:", err));
     }
 
@@ -141,6 +147,7 @@ class WeatherInfo {
         document.getElementById("dateC3").innerText = this.nextDaysDate[2];
         document.getElementById("dateC4").innerText = this.nextDaysDate[3];
         document.getElementById("dateC5").innerText = this.nextDaysDate[4];
+
         document.getElementById("timeD1").innerText = this.nextHoursTime[0];
         document.getElementById("timeD2").innerText = this.nextHoursTime[1];
         document.getElementById("timeD3").innerText = this.nextHoursTime[2];
@@ -158,18 +165,43 @@ class WeatherInfo {
         document.getElementById("tempD5").innerText = `${Math.round(this.nextHoursTemp[4])}°C`;
 
     }
+
+
+    async getAIRecommendation(){
+        const prompt = `It's currently ${this.temp}°C and ${this.weather}, and in less than 3 hours it'll be ${this.nextHoursTemp[0]}°C and ${this.nextHoursWeather}. Also, time is ${this.getLocalTime()}, and we are in ${this.Name}. Suggest a fun activity either indoor or outdoors, or tell me if it is too late and if it is better to go to bed.`
+
+        try {
+            const response = await client.chat.completions.create({
+                model: "gpt-4",
+                messages: [{ role: "user", content: prompt }]
+            });
+      
+            console.log("AI Suggestion:", response.choices[0].message.content);
+            return response.choices[0].message.content;
+          } catch (err) {
+            console.error("Error fetching AI response:", err);
+            return "Sorry, couldn't fetch a suggestion.";
+          }
+    }
+    async magic() {
+        const aiSuggestion = await this.getAIRecommendation();
+        document.getElementById("response").innerText = aiSuggestion;
+    }
 }
 
-
+// Initialize Weather
 let place = "Arkansas,us"
 const weather = new WeatherInfo(place)
+window.weather = weather;
 weather.fetchData()
 
+// For search Bar
 let searchCity = "";
-
 document.getElementById("searchInput").addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       searchValue = document.getElementById("searchInput").value.trim();
       weather.update(searchValue);
     }
-  });
+});
+
+console.log(response.output_text); 

@@ -4,9 +4,7 @@
 
 body {
     background: linear-gradient(135deg, #fbfbfb 0%, #a4a9ac 50%, #545a5f 100%);
-    height: 100vh;
     margin: 0;
-    overflow: hidden;
     font-family: Poppins, Roboto, sans-serif;
     display: flex;
     flex-direction: column;
@@ -150,7 +148,7 @@ button:hover {
     flex: 1;
 }
 
-.boxRow{
+.boxRow, .boxRowF {
     width: 90vw;
     padding: 18px 0px 12px;
     margin: 0px 54px;
@@ -386,4 +384,52 @@ button:hover {
 }
 .tempD {
     font-weight: bold;
+}
+
+.boxRowF {
+    justify-content: center;
+}
+
+.boxE {
+    border: 1px, dotted, red;
+    background-color: #d9d9d9;
+    box-shadow: 8px 8px 4px #313537;
+    height: 36vh;
+    width: 50vw;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.titleE {
+    color: #313537;
+    margin-top: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    align-self: center;   
+}
+.titleE:hover {
+    color: black;
+}
+.response {
+    background-color: #fbfbfb;
+    margin-top: 10px;
+    min-height: 24vh;
+    min-width: 40vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.credits {
+    align-self: flex-end;
+    margin-right: 14px;
+    margin-top: 4px;
+    font-size: 14px;
 }
