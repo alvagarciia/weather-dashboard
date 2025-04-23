@@ -149,7 +149,6 @@ input:focus {
     flex-direction: row;
 }
 .column-B1, .column-B2, .column-B3 {
-    border: 1px, dotted, red;
     flex: 1;
 }
  
@@ -163,13 +162,14 @@ input:focus {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 32px;
+    margin-left: 10px;
     font-size: 60px;
     line-height: 50px;
     font-weight: bold;
 }
 .tempB1-2 {
     align-self: flex-start;
-    margin-left: 26px;
+    margin-left: 32px;
     display: flex;
     align-items: center;
     margin-bottom: 16px;
@@ -188,7 +188,7 @@ input:focus {
 
 .suntime {
     margin-bottom: 12px;
-    margin-left: 24px;
+    margin-left: 30px;
     display: flex;
     flex-direction: row;
     align-self: flex-start;
@@ -219,10 +219,13 @@ input:focus {
     align-self: flex-end;
 }
 .weatherB2 {
-    margin-bottom: 42px;
-    margin-top: 36px;
-    font-size: 20px;
+    margin-bottom: 24px;
+    margin-top: 0px;
+    font-size: 24px;
     font-weight: bold;
+}
+.iconB2 {
+    line-height: 0px;
 }
 
 .column-B3 {
@@ -235,7 +238,6 @@ input:focus {
     flex-direction: row;
 }
 .humidityB3-1, .wspeedB3-1, .pressureB3-1, .uvB3-1 {
-    padding-top: 12px;
     flex: 1;
     font-size: 12px;
     display: flex;
@@ -263,30 +265,38 @@ input:focus {
     font-weight: bold;
     align-self: center;
 }
+.titleC {
+    margin-bottom: 8px;
+}
 .dayC {
-    border: 1px, dotted, red;
     flex: 1;
     padding: 0px 10px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
     align-items: center;
 }
 .iconC { 
     margin-left: 12px;
 }
+.wIcon {
+    object-fit: contain; /* or cover */
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-left: 8px;
+}
 .tempC { 
+    margin-left: 24px;
     font-weight: bold;
     font-size: 18px;
-    margin-left: 24px;
 }
 .dateC { 
-    border: 1px, dotted, red;
     flex: 1;
     display: flex;
     justify-content: center;
     margin-left: 24px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight:700; 
 }
 
 .boxD {
