@@ -25,4 +25,5 @@ The goal of this project is to demonstrate the ability to take a Figma screen, r
 1. Clone this repository:
    ```bash
    git clone git@github.com:your-username/weather-dashboard.git
-2. Open index.html in your browser
+2. Run'node server.js' in bash
+3. Click on localhost link

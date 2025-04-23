@@ -1,8 +1,3 @@
-// For AI
-// import OpenAI from "openai";
-// const client = new OpenAI();
-
-
 class WeatherInfo {
     constructor(cityInput) {
         this.cityInput = cityInput;
@@ -167,26 +162,32 @@ class WeatherInfo {
     }
 
 
-    // async getAIRecommendation(){
-    //     const prompt = `It's currently ${this.temp}°C and ${this.weather}, and in less than 3 hours it'll be ${this.nextHoursTemp[0]}°C and ${this.nextHoursWeather}. Also, time is ${this.getLocalTime()}, and we are in ${this.Name}. Suggest a fun activity either indoor or outdoors, or tell me if it is too late and if it is better to go to bed.`
-
-    //     try {
-    //         const response = await client.chat.completions.create({
-    //             model: "gpt-4",
-    //             messages: [{ role: "user", content: prompt }]
-    //         });
-      
-    //         console.log("AI Suggestion:", response.choices[0].message.content);
-    //         return response.choices[0].message.content;
-    //       } catch (err) {
-    //         console.error("Error fetching AI response:", err);
-    //         return "Sorry, couldn't fetch a suggestion.";
-    //       }
-    // }
-    // async magic() {
-    //     const aiSuggestion = await this.getAIRecommendation();
-    //     document.getElementById("response").innerText = aiSuggestion;
-    // }
+    async magic() {
+        const prompt = `It's currently ${this.currentTemp}°C and ${this.weather}, and in less than 3 hours it'll be ${this.nextHoursTemp[0]}°C and ${this.nextHoursWeather}. Also, time is ${this.getLocalTime()}, and we are in ${this.cityName}. Suggest a fun activity either indoor or outdoors, or tell me if it is too late and if it is better to go to bed.`;
+    
+        try {
+            const response = await fetch('/get-activity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch AI suggestion');
+            }
+    
+            const data = await response.json();
+            const aiSuggestion = data.suggestion;
+    
+            // Update the response div with the AI's suggestion
+            document.getElementById("response").innerText = aiSuggestion;
+        } catch (err) {
+            console.error("Error fetching AI response:", err);
+            document.getElementById("response").innerText = "Sorry, couldn't fetch a suggestion.";
+        }
+    }
 }
 
 // Initialize Weather
