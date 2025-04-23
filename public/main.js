@@ -165,7 +165,7 @@ class WeatherInfo {
     async magic() {
         const prompt = `It's currently ${this.currentTemp}°C and ${this.weather}, suggest a fun activity.`;
 
-        //const prompt = `It's currently ${this.currentTemp}°C and ${this.weather}, and in less than 3 hours it'll be ${this.nextHoursTemp[0]}°C and ${this.nextHoursWeather}. Also, time is ${this.getLocalTime()}, and we are in ${this.cityName}. Suggest a fun activity either indoor or outdoors, or tell me if it is too late and if it is better to go to bed.`;
+        //const prompt = `It's currently ${this.currentTemp}°C and ${this.weather}, and in less than 3 hours it'll be ${this.nextHoursTemp[0]}°C and ${this.nextHoursWeather}. Also, time is ${this.getLocalTime()}, and we are in ${this.cityName}. Suggest a fun activity either indoor or outdoors if appropriate for the time. Answer in 300 characters or less.`;
     
         try {
             const response = await fetch('/get-activity', {
