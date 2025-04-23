@@ -112,7 +112,6 @@ class WeatherInfo {
 
     updateDOM() {
         document.getElementById("city-name").innerText = this.cityName;
-        document.getElementById("time").innerText = this.time;
         document.getElementById("date").innerText = this.date;
 
         document.getElementById("realTemp").innerText = `${Math.round(this.currentTemp)}°C`;

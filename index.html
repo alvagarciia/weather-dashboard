@@ -10,10 +10,11 @@
 <body>
     <div class="header">
         <div class="mode">
-            <div class="button">B</div>
-            <div class="text"><strong>
-                Light Mode
-            </strong></div>
+            <label class="toggle">
+                <input type="checkbox">
+                <span class="slider"></span>
+              </label>
+            <div class="text"><strong> Light Mode </strong></div>
         </div>
         <div class="search">
             <div class="iconH">
@@ -26,7 +27,7 @@
                 <input type="text" id="searchInput" placeholder="Search for your preferred city..."/>
             </div>
         </div>
-        <div class="location">
+        <button class="location" onclick="weather.update('Arkansas,US')">
             <div class="iconH2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin">
                     <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
@@ -36,7 +37,7 @@
             <div class="textHeader"><strong>
                 Current Location
             </strong></div>
-        </div>
+        </button>
     </div>
     <div class="content">
         <div class="boxRow">
