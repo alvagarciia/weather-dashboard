@@ -132,7 +132,7 @@ input:focus {
 } 
 .timeA {
     margin-top: 30px;
-    font-size: 72px;
+    font-size: 76px;
     font-weight: bold;
     line-height: 50px;
 } 
@@ -259,7 +259,6 @@ input:focus {
     flex-direction: column;
 }
 .titleC, .titleD {
-    border: 1px, dotted, red;
     margin-top: 12px;
     font-size: 24px;
     font-weight: bold;
@@ -319,13 +318,17 @@ input:focus {
     border-radius: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
 }
 .timeD {
-    border: 1px, dotted, red;
+    margin-top: 12px;
     font-weight: bold;
     font-size: 18px;
+}
+.wIconD {
+    margin-top: 8px;
+    width: 100px;
+    height: 100px;
 }
 .tempD {
     font-weight: bold;

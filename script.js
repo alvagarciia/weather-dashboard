@@ -61,9 +61,9 @@ class WeatherInfo {
                 
 
                 for (let i = 0; i < 5; i++) {
-                    this.nextHoursTime[i] = this.convertTime(data.list[i].dt, this.timezoneOffset); // if needed
+                    this.nextHoursTime[i] = this.convertTimeB(data.list[i].dt, this.timezoneOffset); // if needed
                     this.nextHoursIconCode[i] = data.list[i].weather[0].icon;
-                    this.iconDUrl[i] = `https://openweathermap.org/img/wn/${this.nextHoursIconCode[i]}.png`;
+                    this.iconDUrl[i] = `https://openweathermap.org/img/wn/${this.nextHoursIconCode[i]}@4x.png`;
                     this.nextHoursTemp[i] = data.list[i].main.temp;
                 }
                 this.updateDOM2();
@@ -71,15 +71,22 @@ class WeatherInfo {
             .catch(err => console.error("Forecast fetch failed:", err));
     }
 
+    // ex: 07:00 PM
     convertTime(unixTimestamp, timezoneOffset) {
         const date = new Date((unixTimestamp + timezoneOffset) * 1000);
         return date.toLocaleTimeString("en-US", {hour: '2-digit', minute: '2-digit', timeZone: 'UTC'});
     }
     
+    // ex: 19:00
+    convertTimeB(unixTimestamp, timezoneOffset) {
+        const date = new Date((unixTimestamp + timezoneOffset) * 1000);
+        return date.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC'});
+    }
+
     getLocalTime() { 
         const nowUTC = Date.now(); // milliseconds
         const local = new Date(nowUTC + this.timezoneOffset * 1000);
-        return local.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+        return local.toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'UTC' });
     }
 
     startClock() {
@@ -135,6 +142,21 @@ class WeatherInfo {
         document.getElementById("dateC3").innerText = this.nextDaysDate[2];
         document.getElementById("dateC4").innerText = this.nextDaysDate[3];
         document.getElementById("dateC5").innerText = this.nextDaysDate[4];
+        document.getElementById("timeD1").innerText = this.nextHoursTime[0];
+        document.getElementById("timeD2").innerText = this.nextHoursTime[1];
+        document.getElementById("timeD3").innerText = this.nextHoursTime[2];
+        document.getElementById("timeD4").innerText = this.nextHoursTime[3];
+        document.getElementById("timeD5").innerText = this.nextHoursTime[4];
+        document.getElementById("wIconD1").src = this.iconDUrl[0];
+        document.getElementById("wIconD2").src = this.iconDUrl[1];
+        document.getElementById("wIconD3").src = this.iconDUrl[2];
+        document.getElementById("wIconD4").src = this.iconDUrl[3];
+        document.getElementById("wIconD5").src = this.iconDUrl[4];
+        document.getElementById("tempD1").innerText = `${Math.round(this.nextHoursTemp[0])}°C`;
+        document.getElementById("tempD2").innerText = `${Math.round(this.nextHoursTemp[1])}°C`;
+        document.getElementById("tempD3").innerText = `${Math.round(this.nextHoursTemp[2])}°C`;
+        document.getElementById("tempD4").innerText = `${Math.round(this.nextHoursTemp[3])}°C`;
+        document.getElementById("tempD5").innerText = `${Math.round(this.nextHoursTemp[4])}°C`;
 
     }
 }
