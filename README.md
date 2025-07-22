@@ -14,16 +14,17 @@ The goal of this project is to demonstrate the ability to take a Figma screen, r
 
 ## Tech Stack 🚀
 
-- **HTML**
-- **CSS (Flexbox + Grid)**
+- **HTML/CSS**
 - **JavaScript**
-- **Fetch API**
-- **OpenWeatherMap API** (or similar)
+- **OpenWeatherMap API**
+- **OpenAI API**
 
 ## How to Run 📦
 
 1. Clone this repository:
    ```bash
    git clone git@github.com:your-username/weather-dashboard.git
-2. Run'node server.js' in bash
+2. Run in bash:
+   ```bash
+   node server.js
 3. Click on localhost link
