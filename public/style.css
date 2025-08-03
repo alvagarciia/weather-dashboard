@@ -403,18 +403,16 @@ button:hover {
     align-items: center;
 }
 .titleE {
-    color: #313537;
+    color: black;
     margin-top: 12px;
     font-size: 22px;
     font-weight: bold;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
     cursor: pointer;
     transition: color 0.2s ease;
     align-self: center;   
 }
 .titleE:hover {
-    color: black;
+    color: #f49b36;
 }
 .response {
     background-color: #fbfbfb;
