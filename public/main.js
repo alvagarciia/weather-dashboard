@@ -1,6 +1,8 @@
 class WeatherInfo {
     constructor(cityInput) {
         this.cityInput = cityInput;
+        this.latInput = null;
+        this.lonInput = null;
         this.clockInterval = null;
         this.nextDaysIconCode = [];
         this.iconCUrl = [];
@@ -19,10 +21,17 @@ class WeatherInfo {
     }
 
     fetchData() {
+
         // Another format: https://api.openweathermap.org/data/2.5/weather?lat=36.06&lon=-94.17&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
-        const url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`;
-        fetch(url)
+        let urls = []
+        if(this.cityInput) {
+            urls = [`http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`,`https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
+        }
+        else {
+            urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${this.latInput}&lon=${this.lonInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`, `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latInput}&lon=${this.lonInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
+        }
+
+        fetch(urls[0])
             .then(res => res.json())
             .then(data => {
                 this.cityName = data.name;
@@ -47,10 +56,22 @@ class WeatherInfo {
             })
             .catch(err => console.error("Weather fetch failed:", err));
 
-        fetch(url2)
+        fetch(urls[1])
             .then(res => res.json())
-            .then(data => {            
-                const noonForecasts = data.list.filter(item => item.dt_txt.includes("12:00:00")).slice(0, 5);
+            .then(data => {
+                // transform offset from seconds to hours
+                let hourOffset = this.timezoneOffset / -3600;
+                // getting right hour from utc
+                let hour = (hourOffset + 12) % 24;
+                // forecast API only gets times that are multiples of 3, so we change it here:
+                if(hour % 3 == 1)
+                    hour -= 1;
+                else if(hour % 3 == 2)
+                    hour += 1;
+                // get time string
+                let time = hour.toString() + ":00:00"
+                // get a list of daily forecasts at noon (or around)
+                const noonForecasts = data.list.filter(item => item.dt_txt.includes(time)).slice(0, 5);
                 
                 for (let i = 0; i < noonForecasts.length; i++) {
                     const forecast = noonForecasts[i];
@@ -105,6 +126,25 @@ class WeatherInfo {
         const now = new Date();
         const local = new Date(now.getTime() + timezoneOffset * 1000);
         return local.toLocaleDateString("en-US", {weekday: 'long', month: 'short', day: 'numeric'});
+    }
+
+    getCurrentLocation() {
+        console.log("enter func()")
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    this.latInput = position.coords.latitude;
+                    this.lonInput = position.coords.longitude;
+                    console.log(` at func if() = ${this.latInput}`)
+                    this.update(null);
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                }
+            )
+        }
+        else
+            alert("Geolocation is not supported by this browser.");
     }
 
     formatDate(dt_txt) {
@@ -194,16 +234,18 @@ class WeatherInfo {
 }
 
 // Initialize Weather
-let place = "Arkansas,us"
+let place = "sydney,aus"
 const weather = new WeatherInfo(place)
 window.weather = weather;
 weather.fetchData()
 
 // For search Bar
 let searchCity = "";
-document.getElementById("searchInput").addEventListener("keypress", (e) => {
+const searchBar = document.getElementById("searchInput");
+searchBar.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-      searchCity = document.getElementById("searchInput").value.trim();
+      searchCity = searchBar.value.trim();
+      searchBar.value = ""
       weather.update(searchCity);
     }
 });
