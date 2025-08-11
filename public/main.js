@@ -30,8 +30,6 @@ class WeatherInfo {
     }
 
     async fetchData() {
-        console.log("fetching!")
-        
         // Only show loading overlay on initial page load
         if (this.isInitialLoad) {
             showLoading();
@@ -261,12 +259,9 @@ class WeatherInfo {
 }
 
 // Initialize Weather
-// let place = "sydney,aus"
-// const weather = new WeatherInfo(null)
-// weather.getCurrentLocation();
-const weather = new WeatherInfo('sydney,aus')
+const weather = new WeatherInfo(null)
 window.weather = weather;
-weather.fetchData();
+weather.getCurrentLocation();
 
 // For search Bar
 let searchCity = "";
