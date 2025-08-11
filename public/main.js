@@ -22,10 +22,32 @@ class WeatherInfo {
         this.iconDUrl = [];
         this.nextHoursTemp = [];
         this.isInitialLoad = true; // Track if this is the first load
+        this.isCelsius = false; // true = Celsius, false = Farenheit
+        this.unitAPI = "imperial";
+        this.tempUnit = "°F";
+        this.windSpdUnit = "mph";
     }
 
     update(cityInput) {
         this.cityInput = cityInput;
+        this.fetchData();
+    }
+
+    updateTempUnits() {
+        this.isCelsius = !this.isCelsius;
+
+        if(this.isCelsius) {
+            this.unitAPI = "metric";
+            this.tempUnit = "°C"
+            this.windSpdUnit = "m/s";
+        }
+
+        else {
+            this.unitAPI = "imperial";
+            this.tempUnit = "°F"
+            this.windSpdUnit = "mph";
+        }
+
         this.fetchData();
     }
 
@@ -37,10 +59,10 @@ class WeatherInfo {
 
         let urls = []
         if(this.cityInput) {
-            urls = [`http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`,`https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
+            urls = [`http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=${this.unitAPI}`,`https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=${this.unitAPI}`]
         }
         else {
-            urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${this.latInput}&lon=${this.lonInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`, `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latInput}&lon=${this.lonInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
+            urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${this.latInput}&lon=${this.lonInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=${this.unitAPI}`, `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latInput}&lon=${this.lonInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=${this.unitAPI}`]
         }
 
         try {
@@ -181,14 +203,14 @@ class WeatherInfo {
         document.getElementById("city-name").innerText = this.cityName;
         document.getElementById("date").innerText = this.date;
 
-        document.getElementById("realTemp").innerText = `${Math.round(this.currentTemp)}°C`;
-        document.getElementById("feelTemp").innerText = `${Math.round(this.feelsTemp)}°C`;
+        document.getElementById("realTemp").innerText = `${Math.round(this.currentTemp)}${this.tempUnit}`;
+        document.getElementById("feelTemp").innerText = `${Math.round(this.feelsTemp)}${this.tempUnit}`;
         document.getElementById("sunriseTime").innerText = this.sunriseTime;
         document.getElementById("sunsetTime").innerText = this.sunsetTime;
         document.getElementById("weatherIcon").src = this.iconUrl;
         document.getElementById("weather").innerHTML = this.weather;
         document.getElementById("humidity").innerText = `${this.humidity} %`;
-        document.getElementById("windSpeed").innerText = `${Math.round(this.windSpeed)} km/h`;
+        document.getElementById("windSpeed").innerText = `${Math.round(this.windSpeed)} ${this.windSpdUnit}`;
         document.getElementById("pressure").innerText = `${this.pressure} hPa`;
         document.getElementById("uvIndex").innerText = this.uv;
     }
@@ -198,11 +220,11 @@ class WeatherInfo {
         document.getElementById("wIconC3").src = this.iconCUrl[2];
         document.getElementById("wIconC4").src = this.iconCUrl[3];
         document.getElementById("wIconC5").src = this.iconCUrl[4];
-        document.getElementById("tempC1").innerText = `${Math.round(this.nextDaysTemp[0])}°C`;
-        document.getElementById("tempC2").innerText = `${Math.round(this.nextDaysTemp[1])}°C`;
-        document.getElementById("tempC3").innerText = `${Math.round(this.nextDaysTemp[2])}°C`;
-        document.getElementById("tempC4").innerText = `${Math.round(this.nextDaysTemp[3])}°C`;
-        document.getElementById("tempC5").innerText = `${Math.round(this.nextDaysTemp[4])}°C`;
+        document.getElementById("tempC1").innerText = `${Math.round(this.nextDaysTemp[0])}${this.tempUnit}`;
+        document.getElementById("tempC2").innerText = `${Math.round(this.nextDaysTemp[1])}${this.tempUnit}`;
+        document.getElementById("tempC3").innerText = `${Math.round(this.nextDaysTemp[2])}${this.tempUnit}`;
+        document.getElementById("tempC4").innerText = `${Math.round(this.nextDaysTemp[3])}${this.tempUnit}`;
+        document.getElementById("tempC5").innerText = `${Math.round(this.nextDaysTemp[4])}${this.tempUnit}`;
         document.getElementById("dateC1").innerText = this.nextDaysDate[0];
         document.getElementById("dateC2").innerText = this.nextDaysDate[1];
         document.getElementById("dateC3").innerText = this.nextDaysDate[2];
@@ -219,11 +241,11 @@ class WeatherInfo {
         document.getElementById("wIconD3").src = this.iconDUrl[2];
         document.getElementById("wIconD4").src = this.iconDUrl[3];
         document.getElementById("wIconD5").src = this.iconDUrl[4];
-        document.getElementById("tempD1").innerText = `${Math.round(this.nextHoursTemp[0])}°C`;
-        document.getElementById("tempD2").innerText = `${Math.round(this.nextHoursTemp[1])}°C`;
-        document.getElementById("tempD3").innerText = `${Math.round(this.nextHoursTemp[2])}°C`;
-        document.getElementById("tempD4").innerText = `${Math.round(this.nextHoursTemp[3])}°C`;
-        document.getElementById("tempD5").innerText = `${Math.round(this.nextHoursTemp[4])}°C`;
+        document.getElementById("tempD1").innerText = `${Math.round(this.nextHoursTemp[0])}${this.tempUnit}`;
+        document.getElementById("tempD2").innerText = `${Math.round(this.nextHoursTemp[1])}${this.tempUnit}`;
+        document.getElementById("tempD3").innerText = `${Math.round(this.nextHoursTemp[2])}${this.tempUnit}`;
+        document.getElementById("tempD4").innerText = `${Math.round(this.nextHoursTemp[3])}${this.tempUnit}`;
+        document.getElementById("tempD5").innerText = `${Math.round(this.nextHoursTemp[4])}${this.tempUnit}`;
 
     }
 
