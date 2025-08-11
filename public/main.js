@@ -1,3 +1,11 @@
+function showLoading() {
+    document.getElementById("loading-overlay").style.display = "flex";
+}
+
+function hideLoading() {
+    document.getElementById("loading-overlay").style.display = "none";
+}
+
 class WeatherInfo {
     constructor(cityInput) {
         this.cityInput = cityInput;
@@ -13,6 +21,7 @@ class WeatherInfo {
         this.nextHoursIconCode = [];
         this.iconDUrl = [];
         this.nextHoursTemp = [];
+        this.isInitialLoad = true; // Track if this is the first load
     }
 
     update(cityInput) {
@@ -20,9 +29,14 @@ class WeatherInfo {
         this.fetchData();
     }
 
-    fetchData() {
+    async fetchData() {
+        console.log("fetching!")
+        
+        // Only show loading overlay on initial page load
+        if (this.isInitialLoad) {
+            showLoading();
+        }
 
-        // Another format: https://api.openweathermap.org/data/2.5/weather?lat=36.06&lon=-94.17&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`
         let urls = []
         if(this.cityInput) {
             urls = [`http://api.openweathermap.org/data/2.5/weather?q=${this.cityInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`,`https://api.openweathermap.org/data/2.5/forecast?q=${this.cityInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
@@ -31,67 +45,82 @@ class WeatherInfo {
             urls = [`http://api.openweathermap.org/data/2.5/weather?lat=${this.latInput}&lon=${this.lonInput}&APPID=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`, `https://api.openweathermap.org/data/2.5/forecast?lat=${this.latInput}&lon=${this.lonInput}&appid=fe387d7cc44ff11e3753cdc9d2c7e85b&units=metric`]
         }
 
-        fetch(urls[0])
-            .then(res => res.json())
-            .then(data => {
-                this.cityName = data.name;
-                this.timezoneOffset = data.timezone;
-                this.dt = data.dt;
+        try {
+            // Use Promise.all to wait for both API calls to complete
+            const [weatherResponse, forecastResponse] = await Promise.all([
+                fetch(urls[0]).then(res => res.json()),
+                fetch(urls[1]).then(res => res.json())
+            ]);
 
-                this.date = this.getLocalDate(data.timezone);
-                this.currentTemp = data.main.temp;
-                this.feelsTemp = data.main.feels_like;
-                this.iconCode = data.weather[0].icon;
-                this.iconUrl = `https://openweathermap.org/img/wn/${this.iconCode}@4x.png`;
-                this.weather = data.weather[0].main;
-                this.sunriseTime = this.convertTime(data.sys.sunrise, data.timezone);
-                this.sunsetTime = this.convertTime(data.sys.sunset, data.timezone);
-                this.humidity = data.main.humidity;
-                this.windSpeed = data.wind.speed;
-                this.pressure = data.main.pressure;
-                this.uv = 5;
+            // Process weather data
+            this.cityName = weatherResponse.name;
+            this.timezoneOffset = weatherResponse.timezone;
+            this.dt = weatherResponse.dt;
 
-                this.startClock();
-                this.updateDOM();
-            })
-            .catch(err => console.error("Weather fetch failed:", err));
+            this.date = this.getLocalDate(weatherResponse.timezone);
+            this.currentTemp = weatherResponse.main.temp;
+            this.feelsTemp = weatherResponse.main.feels_like;
+            this.iconCode = weatherResponse.weather[0].icon;
+            this.iconUrl = `https://openweathermap.org/img/wn/${this.iconCode}@4x.png`;
+            this.weather = weatherResponse.weather[0].main;
+            this.sunriseTime = this.convertTime(weatherResponse.sys.sunrise, weatherResponse.timezone);
+            this.sunsetTime = this.convertTime(weatherResponse.sys.sunset, weatherResponse.timezone);
+            this.humidity = weatherResponse.main.humidity;
+            this.windSpeed = weatherResponse.wind.speed;
+            this.pressure = weatherResponse.main.pressure;
+            this.uv = 5;
 
-        fetch(urls[1])
-            .then(res => res.json())
-            .then(data => {
-                // transform offset from seconds to hours
-                let hourOffset = this.timezoneOffset / -3600;
-                // getting right hour from utc
-                let hour = (hourOffset + 12) % 24;
-                // forecast API only gets times that are multiples of 3, so we change it here:
-                if(hour % 3 == 1)
-                    hour -= 1;
-                else if(hour % 3 == 2)
-                    hour += 1;
-                // get time string
-                let time = hour.toString() + ":00:00"
-                // get a list of daily forecasts at noon (or around)
-                const noonForecasts = data.list.filter(item => item.dt_txt.includes(time)).slice(0, 5);
-                
-                for (let i = 0; i < noonForecasts.length; i++) {
-                    const forecast = noonForecasts[i];
-                    this.nextDaysIconCode[i] = forecast.weather[0].icon;
-                    this.iconCUrl[i] = `https://openweathermap.org/img/wn/${this.nextDaysIconCode[i]}.png`;
-                    this.nextDaysTemp[i] = forecast.main.temp;
-                    this.nextDaysDate[i] = this.formatDate(forecast.dt_txt);
-                }
-                
+            // Process forecast data
+            let hourOffset = this.timezoneOffset / -3600;
+            let hour = (hourOffset + 12) % 24;
+            if(hour % 3 == 1)
+                hour -= 1;
+            else if(hour % 3 == 2)
+                hour += 1;
+            let time = hour.toString() + ":00:00"
+            const noonForecasts = forecastResponse.list.filter(item => item.dt_txt.includes(time)).slice(0, 5);
+            
+            for (let i = 0; i < noonForecasts.length; i++) {
+                const forecast = noonForecasts[i];
+                this.nextDaysIconCode[i] = forecast.weather[0].icon;
+                this.iconCUrl[i] = `https://openweathermap.org/img/wn/${this.nextDaysIconCode[i]}.png`;
+                this.nextDaysTemp[i] = forecast.main.temp;
+                this.nextDaysDate[i] = this.formatDate(forecast.dt_txt);
+            }
 
-                for (let i = 0; i < 5; i++) {
-                    this.nextHoursTime[i] = this.convertTimeB(data.list[i].dt, this.timezoneOffset); // if needed
-                    this.nextHoursIconCode[i] = data.list[i].weather[0].icon;
-                    this.iconDUrl[i] = `https://openweathermap.org/img/wn/${this.nextHoursIconCode[i]}@4x.png`;
-                    this.nextHoursTemp[i] = data.list[i].main.temp;
-                }
-                this.nextHoursWeather = data.list[0].weather[0].description;
-                this.updateDOM2();
-            })
-            .catch(err => console.error("Forecast fetch failed:", err));
+            for (let i = 0; i < 5; i++) {
+                this.nextHoursTime[i] = this.convertTimeB(forecastResponse.list[i].dt, this.timezoneOffset);
+                this.nextHoursIconCode[i] = forecastResponse.list[i].weather[0].icon;
+                this.iconDUrl[i] = `https://openweathermap.org/img/wn/${this.nextHoursIconCode[i]}@4x.png`;
+                this.nextHoursTemp[i] = forecastResponse.list[i].main.temp;
+            }
+            this.nextHoursWeather = forecastResponse.list[0].weather[0].description;
+
+            // Start clock and update DOM
+            this.startClock();
+            this.updateDOM();
+            this.updateDOM2();
+
+            // Hide loading overlay only if it was shown (initial load)
+            if (this.isInitialLoad) {
+                // Use requestAnimationFrame to ensure DOM updates are rendered
+                requestAnimationFrame(() => {
+                    hideLoading();
+                });
+                // Mark that initial load is complete
+                this.isInitialLoad = false;
+            }
+
+        } catch (err) {
+            console.error("Error fetching weather data:", err);
+            // Hide loading even on error, but only if it was shown
+            if (this.isInitialLoad) {
+                requestAnimationFrame(() => {
+                    hideLoading();
+                });
+                this.isInitialLoad = false;
+            }
+        }
     }
 
     // ex: 07:00 PM
@@ -233,9 +262,10 @@ class WeatherInfo {
 
 // Initialize Weather
 // let place = "sydney,aus"
-const weather = new WeatherInfo(null)
+// const weather = new WeatherInfo(null)
+// weather.getCurrentLocation();
+const weather = new WeatherInfo('sydney,aus')
 window.weather = weather;
-weather.getCurrentLocation();
 weather.fetchData();
 
 // For search Bar
