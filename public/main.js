@@ -129,13 +129,11 @@ class WeatherInfo {
     }
 
     getCurrentLocation() {
-        console.log("enter func()")
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     this.latInput = position.coords.latitude;
                     this.lonInput = position.coords.longitude;
-                    console.log(` at func if() = ${this.latInput}`)
                     this.update(null);
                 },
                 (error) => {
@@ -234,10 +232,11 @@ class WeatherInfo {
 }
 
 // Initialize Weather
-let place = "sydney,aus"
-const weather = new WeatherInfo(place)
+// let place = "sydney,aus"
+const weather = new WeatherInfo(null)
 window.weather = weather;
-weather.fetchData()
+weather.getCurrentLocation();
+weather.fetchData();
 
 // For search Bar
 let searchCity = "";
