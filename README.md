@@ -1,6 +1,6 @@
 <a id="readme-top"></a>
 <!--
-*** Template from Othneil Drew @othneildrew on GitHub
+*** ReadMe template from Othneil Drew @othneildrew on GitHub
 -->
 
 
@@ -33,6 +33,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#features">Features</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -44,7 +45,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -58,7 +58,21 @@
 
 ![Weather Dashboard Showcase](./media/weather-dashboard-demo.gif)
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `alvaro-garciam`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
+This is a weather dashboard web application built from a Figma design.
+
+The goal of this project is to demonstrate the ability to take a Figma screen, replicate its design using frontend technologies, and implement dynamic functionality by integrating a weather API and a LLM API that recommends activities based on the current weather and location.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Features
+
+- Search for any city and view its current weather, hourly forecast, and 5-day forecast
+- Use "Current Location" button to display weather data for your current location
+- Toggle between metric and imperial units
+- Get an activity recommended by AI using the "Get an Activity Recommended by AI" section
+- Responsive, clean UI built to match a provided Figma template
+- Real-time data fetched from a public weather API
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -82,12 +96,10 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -95,7 +107,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get an API Key at [https://platform.openai.com](https://platform.openai.com/api-keys)
 2. Clone the repo
    ```sh
    git clone https://github.com/alvagarciia/weather-dashboard.git
@@ -104,13 +116,13 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+4. Create a `.env` file and enter your API key there
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   OPENAI_API_KEY = yourAPIKey;
    ```
 5. Change git remote url to avoid accidental pushes to base project
    ```sh
-   git remote set-url origin alvagarciia/weather-dashboard
+   git remote set-url origin github_username/weather-dashboard
    git remote -v # confirm the changes
    ```
 
@@ -121,23 +133,9 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This app features a simple and easy to use weather dashboard, showing different features like hourly and daily temperature forecasts, the current time, and sunrise and sunset times, among others. These are available for every location accessible with OpenWeatherMap after searching the city name in the search bar.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/alvagarciia/weather-dashboard/issues) for a full list of proposed features (and known issues).
+In addition, the bottom-most box offers the ability to get an LLM suggestion for an activity.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -159,12 +157,6 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Top contributors:
-
-<a href="https://github.com/alvagarciia/weather-dashboard/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=alvagarciia/weather-dashboard" alt="contrib.rocks image" />
-</a>
-
 
 
 <!-- LICENSE -->
@@ -182,17 +174,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Alvaro Garcia - [LinkedIn @alvaro-garciam](https://www.linkedin.com/in/alvaro-garciam) - alvaroedgamu@gmail.com
 
 Project Link: [https://github.com/alvagarciia/weather-dashboard](https://github.com/alvagarciia/weather-dashboard)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
