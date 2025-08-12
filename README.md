@@ -1,6 +1,8 @@
 # Weather Dashboard 🌤️
 
-This is a weather dashboard web application built from a Figma design.
+This is a weather dashboard web application built from the following Figma design:
+
+![Figma Design](./weather-dashboard-figma.png)
 
 The goal of this project is to demonstrate the ability to take a Figma screen, replicate its design using frontend technologies, and implement dynamic functionality by integrating a weather API.
 
