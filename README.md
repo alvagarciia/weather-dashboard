@@ -58,7 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-demo]](./media/weather-dashboard-demo.gif)
+![Weather Dashboard Showcase](./media/weather-dashboard-demo.gif)
 
 Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `alvaro-garciam`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
 
