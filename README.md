@@ -34,6 +34,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#features">Features</a></li>
+        <li><a href="#figma-design">Figma Design</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -76,6 +77,14 @@ The goal of this project is to demonstrate the ability to take a Figma screen, r
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+### Figma Design
+
+Below is the Figma design used to create this project:
+![Figma Design](./media/weather-dashboard-figma.png)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Built With
