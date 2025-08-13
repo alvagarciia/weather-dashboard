@@ -2,8 +2,8 @@
 <!--
 *** ReadMe template from Othneil Drew @othneildrew on GitHub
 -->
-[![project_license][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![project_license][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 <!-- PROJECT LOGO -->
