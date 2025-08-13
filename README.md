@@ -78,10 +78,15 @@ The goal of this project is to demonstrate the ability to take a Figma screen, r
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### Figma Design
+### Figma Design vs Project Comparison
 
 Below is the Figma design used to create this project:
+
 ![Figma Design](./media/weather-dashboard-figma.png)
+
+And following that, here is a screenshot of the final output of the project:
+
+![Project Design](./media/weather-dashboard-res1.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
