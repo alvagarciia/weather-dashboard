@@ -2,7 +2,6 @@
 <!--
 *** ReadMe template from Othneil Drew @othneildrew on GitHub
 -->
-[![Contributors][contributors-shield]][contributors-url]
 [![project_license][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -191,10 +190,8 @@ Project Link: [https://github.com/alvagarciia/weather-dashboard](https://github.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/alvagarciia/weather-dashboardalva.garciia/weather-dashboard.svg?style=for-the-badge
-[contributors-url]: https://github.com/alvagarciia/weather-dashboard/graphs/contributors
 [license-shield]: https://img.shields.io/github/license/alvagarciia/weather-dashboard.svg?style=for-the-badge
-[license-url]: https://github.com/alva.garciia/weather-dashboard/blob/master/LICENSE.txt
+[license-url]: https://github.com/alva.garciia/weather-dashboard/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alvaro-garciam
 
